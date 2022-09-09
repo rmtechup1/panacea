@@ -16,14 +16,21 @@ inp.on("close", () => {
   //Your code goes here … replace the below line with your code logic 
 
   const ipNum = parseInt(userInput[0]);
+  if(ipNum > 0)
+  {
+    let factorial = 1;
+    let p = 1;
 
-  let factorial = 1;
-  let p = 1;
-  while(p <= ipNum){
+    while(p <= ipNum){
     factorial = factorial * p;
     p = p+1;
-  }
+    }
 
-  console.log(factorial);
+    console.log(factorial);
+  }
+  else{
+    console.log("incorrect input");
+  }
+  
   //end-here
 });

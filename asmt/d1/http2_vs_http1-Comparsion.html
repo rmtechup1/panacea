@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="A comparision between HTTP/1.1 & HTTP/2">
+        <meta name="author" content="Pavan Ram Sripada">
+        <meta name="date" content="9 Oct 2022">
+
+        <style>
+            table, th, td {
+              border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>HTTP/2 vs HTTP/1.1: A Comparison</h1>
+        <h3>Introduction to HTTP:</h3>
+        <ol>
+            <li><b>HTTP</b> stands for HyperText Transport Protocol. It is an application layer protocol that enables exchange of hypermedia documents between clients & servers.</li> 
+            <br>
+            <li>Tim Berners-Lee, the inventor of World Wide Web had visualized & designed WWW as a hypertext system over the network that consisted of the below four components, with HTTP being one of them:
+                <ul>
+                    <li>Clients (Web Browsers) that requested hyper-text docs,</li>
+                    <li>Servers that served the required data,</li>
+                    <li>A textual format to represent hypertext documents (HTML) and</li>
+                    <li>A protocol to exchange the hypertext documents (HTTP)</li>
+                </ul> 
+            </li>
+        </ol>
+        <br>
+        <br>
+        <h3>Evolution of HTTP over time - an overview until HTTP 2.0:</h3>
+        Over the years, HTTP has evolved to become more robust & extensible, functioning as the defacto communication protocol of the World Wide Web. 
+        <br> Despite that, the changing landscape of web and emerging requirements required improved performance apart from newer functionality and it has been upgraded each time to meet those requirements.
+        <ol>
+            <li><b>HTTP 0.9</b>: 
+                <br> HTTP was conceived in early 1989 and came into public existence for the first time on 6th Aug 1991. It was retroactively versioned as HTTP 0.9 as it originally didn't have a version.
+                <br> It's original role was quite simple - to transport hypertext files to your computer as efficiently possible. The web was also simple, made of documents (text + hyperlinks) that did not pose too much of challenge to H/W & N/W of that time. 
+                <br> As a result, HTTP operated by repeating these following steps as many times as needed: 
+                <ul>
+                    <li>Create single connection</li>
+                    <li>Download file</li>
+                    <li>Close connection</li>
+                </ul></li> 
+            <br>
+            <li><b>HTTP 1.0 & HTTP 1.1</b>:
+                <br> In the late 90's, the web transformed from a place entirely consisting of linked docs that you can click through, to a place that supported watching of videos, buying and selling over the internet, editing of documents online & sending greeting cards from the browser.
+                <br> Under such circumstances, the old strategy of 1 connection - 1 file was quite slow for newer use-cases which also demanded additonal features. Thus, HTTP 1.0 evolved as the result of efforts to standardize the diverse, often incompatible enhancements and features that were added in the various implementations of the protocol in browsers (clients) & servers.
+                <br> <br> To better handle the emerging requirements for higher performance while transmitting media in bulk between clients & servers, HTTP 1.1 was created in 1999 as a stop-gap, adding features into HTTP 1.0 that were meant to improve speed & efficiency of web servers powering this 'hypermedia' version of the web.</li> 
+            <br>
+            <li><b>HTTP/2.0</b>: 
+                <br> The web had further evolved in the intervening period between 1999 & 2015, from a collection of 'hypermedia' to a collection of 'web applications'.
+                <br> The sheer volume of various resources to be transmitted, combined with the large number of calls to be made to various servers to render a single web page meant that HTTP 1.1 was no longer performant and the requirement for an upgrade had arisen. However, we lived the same HTTP 1.1, shoe-horning more and more modern applications into the aging specification. 
+                <br>
+                <br> Google, which had been developing increasingly complex web-based apps began work on an enhanced communication protocol called SPDY that was more performant and provided significant advantages over HTTP. This protocol which was already well designed and in use for a few years at Google, was taken as the basis for the next version of HTTP and hence HTTP 2.0 came into existence. </li>
+        </ol>
+        <br>
+        <br>
+
+        <h3>Differences between HTTP 1.1 & HTTP 2.0:</h3>
+
+        <table>
+            <caption>
+              <h4>1. Message format used in communication</h4>
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">HTTP/1.1</th>
+                <th scope="col">HTTP/2.0</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                    All communication between client and server happens in plain-text
+                </td>
+                <td>
+                    <p>All the messages are converted into binary format before transmission and re-converted to text on receiver side once received</p>
+                    <p>The conversion is performed in such a way that the HTTP/1.1 semantics such as Verbs, Methods & Headers are preserved & can be reconstructed after transmission to other side. This ensures backwards-compatibility with apps using HTTP/1.1</p>
+                    <p>Conversion to binary allows for new approaches to data delivery not previously available.</p>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <table>
+            <caption>
+              <h4>2. Message delivery model</h4>
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">HTTP/1.1</th>
+                <th scope="col">HTTP/2.0</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                    <p> HTTP/1.0 had the bottleneck of being able to send only 1 message at any time on a given connection that closes once the response message is received. Client needs to reopen a new connection everytime to send a single message</p>
+                    <p>However, HTTP/1.1 has introduced persistent connections & pipelining to deal with this situation. Persistent connections means that the connection would be explicitly kept open based on the value of a header. Pipelining is the ability to send new request even before receiving the response to the first request.</p>
+                    <p>Given these circumstances with HTTP/1.1, an issue called Head of Line (HOL) blocking becomes more severe. HOL blocking involves a slow response blocking others behind it because the sender can only send one item at a time </p>
+                    <p>While adding separate parallel connections can alleviate this issue, there are limits to the number of such connections due to significant resource costs involved in creating and managing the connections on a network.</p>
+                </td>
+                <td>
+                    <p>An HTTP message (either a req / resp) is transformed into small binary formatted units called frames.</p>
+                    <p>A single connection between client & server can contain several streams. Each stream is comprised of multiple messages (req/resp) that are further comprised of frames.</p>
+                    <p>Frames are the only physical part of the above representation that can be observed on inspecting the communication. During communication, multiple interleaved frames are tagged to respective streams and sent to the other side where they are re-assembled to form the complete message. This is the essence of the 'multiplexed delivery model' followed in HTTP/2.0 </p>
+                    <p>Advantages of multiplexed delivery model: <br>
+                    <ul>
+                      <li>Resolves HOL blocking as there is no need to wait for another message to finish. This approach also allows for concurrent requests & responses to become feasible</li>
+                      <li>Multiple TCP connections are no longer required, resulting in reduction of overall operational cost & bandwidth utilization.</li>
+                      <li>This approach suits HTTPS even better because having a single connection means that there is no need to do session key generation several times whenever session breaks or a new connection gets established.</li>
+                    </ul></p>
+                    <p>Stream prioritization: <br> To resolve the situation where multiple streams wait for the same resource, stream prioritization was also developed. Here, developers can set relative weights to the requests to optimize system performance.</p>
+                    <p>Each stream is assigned relative weights ranging from 1 to 256 (higher value => greater priority). Each stream also states the IDs of all other streams it is dependent upon. </p>
+                    <p>The Server then creates dependency tree to determine the sequence of execution that starts from root node and moves downward. The relative weights determine the relative ratios of resource allocation. Servers may however change the priorities on their own if a certain stream is blocked from accessing a specific resource.</p>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <table>
+          <caption>
+            <h4>3. Flow control & Buffer overflow</h4>
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">HTTP/1.1</th>
+              <th scope="col">HTTP/2.0</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                  Flow Control & Buffer management: <br><p>Flow control relies on underlying TCP connection, with multiple TCP connections involving seoarate flow control on each connection which is resource intensive.</p>
+                  <p>In ACK packet of TCP communication, the receive window size is advertized. If size is non-zero, the data is sent & if size is zero, the transmission is stopped till the receiver asks to resume it again </p> 
+              </td>
+              <td>
+                <p>Since there are multiple streams with differing buffer requirement in one connection, we cannot rely on transport layer (TCP connection) for buffer management & flow control.</p>
+                <p>Client & Server are free to implement their own flow controls and the available buffer space is communicated via WINDOW_UPDATE frame in Application layer itself 
+                <br> <br>
+                Eg: Client fetches the first scan of an image & displays the preview to the user while fetching more critical resources. Then the client can ask for full scan of image to be sent. <br>
+                Thus, instead of flow control based on receive window alone, the client can proactively control the flow of information, improving perceived performance.</p>
+                <p>Intermediate nodes in the network can also use the flow control data to determine their own resource allocations even before the message reaches the receiver, improving things throughout the network,resulting in greater connection efficiency.</p>
+            
+            </td>
+            </tr>
+          </tbody>
+      </table>
+      <br>
+      <br>
+      <table>
+        <caption>
+          <h4>4. Predicting resource requests</h4>
+          A single HTML page may require multiple other resources like CSS, JS, Images...etc to render fully. These dependencies are known only after the HTML page is fully received and is being constructed.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">HTTP/1.1</th>
+            <th scope="col">HTTP/2.0</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+                <p>HTTP/1.1 does resource inlining. If a CSS file is required, it is inlined to the original HTML doc and sent together with the HTML page.</p>
+                <br>Disadvantages of this approach:
+                <ul>
+                  <li>However, this approach is only viable for smaller, text based resources. Larger files, non-text formats will blow up the size of HTML page to be sent, resulting in as much or even more time spent for querying the resources separately.</li>
+                  <li>If some resources already exist in client cache, client cannot refuse such resources and it leads to unnecessary and costly duplication.</li>
+                  <li>If multiple pages need the same resource, it would get added to all those pages unnecessarily increasing the overall size</li>
+                </ul>
+                <p>Thus we require a finer level of control over the secondary resources needed to render a web page</p>
+            </td>
+            <td>
+              <p>HTTP/2.0 deals with this issue via 'Server-push'. As multiple concurrent responses are available and made possible via streams, server can send the secondary resources along with originally requested resource even before the client asks for it. The client can then accept it or deny if the resource is already in it's cache.</p>
+              <p>Server sends PUSH_PROMISE frame that contains only the headers of the actual message, to inform client it is pushing a resource. The client can then receive the push or decline via RST_STREAM frame sent back as response. Clients can even adjust the priority of server-push or disable it via a SETTINGS frame. The key to operation here lies in client control.</p>
+              <p>One should also note the server push needs to be used judiciously. Even though it offers a lot of potential, it is not the answer all the time to optimizing a web-app.</p>
+              <p>Some browsers cannot always cancel pushed requests even if client already has the resource in it's cache. If client mistakenly allows the server to send a duplicate copy, the connection becomes unnecessarily occupied. </p>
+            </td>
+          </tr>
+        </tbody>
+    </table>       
+    <br>
+    <br>
+    <table>
+      <caption>
+        <h4>5. Compression</h4> This is a common method of optimizing web-apps.
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">HTTP/1.1</th>
+          <th scope="col">HTTP/2.0</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+              <p> HTTP/1.1 compresses body but not the headers. Gzip and other programs are used for this purpose. However, the header size quickly adds up over multiple messages, particularly penalizing complicated, API-heavy web applications requiring many different resources & thus many requests to gather all the requirements.</p>
+              <p>Cookies can make headers very large at times, increasing the need for compression.</p>
+          </td>
+          <td>
+              <p>HTTP/2.0 makes use of the binary framing layer here as well, to exhibit greater control over finer detail.</p>
+              <p>Here, headers are split from data to make up header and data frames. The HTTP/2.0 specific compression program HPAC uses Huffman encoding to encode and compress the header metadata, greatly reducing the size of header frame.</p>
+              <p>HPACK can also keep track of the previously conveyed metadata fields & further compresses them according to a dynamixally altered index shared between client and server.</p>
+              <p> Thus, header compression is another feature to reduce client-server latency</p>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+<br><br>
+<p>Thus, HTTP/2.0 gives greater level of control in some cases and simply outshines the older version in other cases.</p>
+
+<br><br><br>---The End---
+    </body>
+</html>

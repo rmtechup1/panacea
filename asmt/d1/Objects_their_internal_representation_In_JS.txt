@@ -1,0 +1,149 @@
+Objects - An introduction
+1. Objects are the only non-primitive data types in JS. Moreover, they are user-defined data types.
+2. A primitive typed data always means a single primitive value whereas objects can store multiple primitives apart from other components.
+3. An Object in JS is like a real-world entity, say a Tooth brush. 
+An object has a set of states within it and is capable of certain behaviors or functionality, just as a toothbrush has a set of states (color = red, type =  soft, price = 100Rs) and can perform actions such as brushing & toungue cleaning.
+
+
+
+
+JS Objects are key-value pairs:
+1. Objects in JS are essentially a collection of key-value pairs. 
+Keys are always of the type string whereas values can be any primitive data type (number, string, boolean...etc), non-primitive data type (arrays, other objects...etc) or even functions.
+2. Objects can be precisely described as:
+'A comma-delimited list of zero or more pairs of property names (keys) and associated values of an object, enclosed within flower braces'.
+
+
+
+
+Defining an object:
+1. Objects are defined in a template based manner rather than a class bsed manner - meaning that we don't require classes to create objects, we can directly define an object via an object literal.
+2. Object literal definition:
+let obj = {}; //empty object
+let obj1 = {
+    key1 : val1,
+    key2 : val2
+};
+3. Via Object constrctor syntax:
+let obj = new Object();
+4. Via a constructor function:
+function vehicle(name, maker){
+    this.name = name;
+    this.maker = maker;
+}
+let car1 = Vehicle('Festa','Ford');
+5. Via Object.create()
+This method can create objects off a prototpye object.
+var Animal = {
+    type: 'invertebrates',
+    displayType: function(){
+        console.log(this.type);
+    }
+}
+
+var fish = Object.create(Animal);
+fish.type = 'Fishes';
+fish.displayType();
+
+
+
+
+Retrieving values:
+1. Dot syntax:
+Obj.propertyName;
+Eg:
+var Animal = {
+    type: 'invertebrates',
+    displayType: function(){
+        console.log(this.type);
+    }
+}
+console.log(Animal.type); // prints the value corresponding to key 'type'
+This syntax requires the key to be a valid identifier and a member of the object.
+Hence, we will get an error if we supply keys such as numeric strings eg: '2' (even if they are a part of the object), dynamic key-value pairs...etc that are not known beforehand.
+2. Bracket syntax:
+console.log(Animal['type']); //prints value for the key 'type'
+This syntax requires the keyname supplied as a string within the square brackets. It can also take an expression that resolves to a string, unlike the dot notation.
+This syntax supports numeric keys as well as dynamically generated keys unlike the dot notation.
+
+
+
+
+Adding, Deleting, Updating key-value pairs:
+1. Adding key-value pair:
+var obj = {
+    k1: 23;
+};
+obj.k2 = 24;
+console.log(obj.k2); // prints 24
+2. Updating values
+obj.k1 = 33;
+console.log(obj.k1); //prints 33 instead of 23 as value has been updated
+3. Deleting key-value pair:
+delete obj.k1;
+console.log(obj.k1); //throws error saying property / key not found
+
+
+
+
+Internal represention in memory:
+1. Like all other primitives, Objects are also usually assigned memory on the stack memory (frames) on declaration.
+2. On initialization, a contiguous block of memory (usually contiguous) is allocated in the heap memory and the reference to the start of the block is stored in the object variable allocated earlier on the stack.
+3. Consider this sample object:
+var obj = {
+    name: 'abc',
+    'age': 20,
+    attendance: ['mon', 'tue', 'fri'],
+    address:{
+        street: 'MIT',
+        area: 'chennai'
+    },
+    sum: (a,b) => {return a+b;}
+}
+
+Stack          |               Heap
+               |  ------>2026                                       -------->3044 (array)
+Global frame   |  |      +------------+------------------------+    |        +-----------+-----------+-----------+
++-----------+  |  |      | name       |          'abc'         |    |        |'mon'      | 'tue'     |'fri'      |
+|obj  [2026]|--|---      +------------+------------------------+    |        +-----------+-----------+-----------+
++-----------+  |         | age        |           20           |    |
+      .        |         +------------+------------------------+    |
+      .        |         | attendance |             [3044]-----|-----
+      .        |         +------------+------------------------+
+               |         | address    |             [4081]-----|------->4081 (another object)
+               |         +------------+------------------------+        +-----------+-----------+
+               |         | sum        | (a,b) => {return a+b;} |        |street     | 'MIT'     |
+               |         +------------+------------------------+        +-----------+-----------+
+               |                                                        |area       | 'chennai' |
+               |                                                        +-----------+-----------+
+               |
+4. We should note that there is no hard & fast rule that objects are always allocated on heap. During performance optimization, they may even get allocated onto the stack if the JS engine decides that the performance justifies the same.  
+5. The above is a generic representation and the specifics may vary based on the code as mentioned in earlier pont and the implementation details of various JS engines.
+
+
+
+
+
+Iterating over object values:
+1. For..In loop
+This loop does not require a separate increment variable to track the count and decide when to end looping as in the case of a standard for loop.
+let obj = {
+    a:2,
+    b:3,
+    c:'qwerty'
+} 
+
+for(tmp in obj){
+    console.log(tmp, ':', obj[tmp]); // prints all key-value pairs
+}
+
+The temporary variable takes the value of the first key & iterates through all the keys in the object. The loop ends once all keys are picked up for iteration.
+Also, we need to note this point reg the sequence of iteration: all integer properties (keys that can be casted into integers, eg: '2' is an integer property whereas '+2', '1.5' are not) are iterated first followed by remaining keys in the creation order.
+
+
+
+
+Additional relevant concepts that can be explored to get a deeper understanding of the object: 
+    -Object copy (by reference, shallow copy, deep copy)
+    -Other ways to iterate over objects
+    -Object vs JSON, Object to JSON conversion and vice versa

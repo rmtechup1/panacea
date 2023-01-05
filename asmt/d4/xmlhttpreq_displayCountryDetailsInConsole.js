@@ -1,6 +1,8 @@
 
 let req = new XMLHttpRequest();
 
+//alternative url: jsonplaceholder.typicode.com/posts
+
 req.open('GET', 'https://restcountries.com/v3.1/all');
 
 req.send();
@@ -18,3 +20,4 @@ req.onload = function(){
     }  
 }
 //why cant we use ()=>{} syntax here for the callback funtion???
+

@@ -38,5 +38,5 @@ _Since window is the global object, you can reference any properties of it with 
 [^1]: https://www.geeksforgeeks.org/differences-between-document-and-window-objects/ , https://stackoverflow.com/questions/9895202/what-is-the-difference-between-window-screen-and-document-in-javascript#9895261
 [^2]: https://stackoverflow.com/questions/6349232/whats-the-difference-between-a-global-variable-and-a-window-variable-in-javas 
 [^3]: https://developer.mozilla.org/en-US/docs/Web/API/Window/window
-[^4]: https://www.geeksforgeeks.org/what-is-the-difference-between-host-objects-and-native-objects/?
+[^4]: https://www.geeksforgeeks.org/what-is-the-difference-between-host-objects-and-native-objects/
 [^5]: https://stackoverflow.com/questions/9895202/what-is-the-difference-between-window-screen-and-document-in-javascript#9895261

@@ -1,0 +1,310 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-color: #21d466;
+}<!--https://www.w3schools.com/html/html_table_borders.asp-->
+    </style>
+  </head>
+  <body>
+    <h2>Document vs Window objects in JS</h2>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Document</th>
+          <th>Window</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>What is it?</td>
+          <td>
+            The Document interface represents any web page loaded in the browser
+            &amp; serves as an entry point into the web page's content which is
+            the DOM tree.
+          </td>
+          <td>
+            The Window interface represents a window containing a DOM document
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            Document thus refers to the content loaded in a browser tab. This
+            interface describes the methods and properties common to various
+            document types such as HTML, XML, SVG...etc. Given a specific
+            document type, a larger API is available
+          </td>
+          <td>
+            Each tab of a tabbed browser is represented by its own 'Window'
+            object. Moreover, a window may be embedded in a HTML element such as
+            iFrame, Object...etc of a document present inside a existing Window.
+            A Window object is the topmost object of the DOM hierarchy
+            <sup class="footnote-ref"
+              ><a href="#fn-1" id="fnref-1" data-footnote-ref>1</a></sup
+            >
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>It is the object of window property</td>
+          <td>It is the object of browser</td>
+        </tr>
+        <tr>
+          <td>BOM vs DOM</td>
+          <td>
+            Document is part of BOM (Browser Object Model) &amp; DOM (Document
+            Object Model)
+          </td>
+          <td>
+            Window is part of BOM (Browser Object Model) but not DOM (Document
+            Object Model)
+          </td>
+        </tr>
+        <tr>
+          <td>Accessing one from other</td>
+          <td>
+            The read-only 'document.defaultView' property returns the Window
+            object associated with a document
+          </td>
+          <td>
+            The 'document' property of a Window object points to the DOM
+            Document loaded in that window. Also of interest is the global
+            variable (for a browser environment in general, the global context
+            is the window object itself
+            <sup class="footnote-ref"
+              ><a href="#fn-2" id="fnref-2" data-footnote-ref>2</a></sup
+            >) called 'window'<sup class="footnote-ref"
+              ><a href="#fn-3" id="fnref-3" data-footnote-ref>3</a></sup
+            >
+            which is exposed in JS &amp; always refers to the tab in which the
+            script is running
+          </td>
+        </tr>
+        <tr>
+          <td>Inheritance hierarchy for the interfaces</td>
+          <td>EventTarget&lt;--Node&lt;--Document</td>
+          <td>EventTarget&lt;--Window</td>
+        </tr>
+        <tr>
+          <td>Interesting properties</td>
+          <td>
+            Document.activeElement , Document.adoptedStyleSheets , Document.head
+            , Document.body , Document.scripts , Document.styleSheets ,
+            Document.pictureInPictureElement , Document.scrollingElement ,
+            Document.plugins , Document.images , Document.links ,
+            Document.characterSet , Document.children , Document.compatMode ,
+            Document.contentType , Document.documentURI ,
+          </td>
+          <td>
+            Window.closed , Window.document , Window.screen , Window.window ,
+            Window.frameElement , Window.frames , Window.parent , Window.history
+            , Window.innerHeight , Window.innerWidth , Window.outerHeight ,
+            Window.outerWidth , Window.location , Window.opener
+          </td>
+        </tr>
+        <tr>
+          <td>Interesting methods</td>
+          <td>
+            Document.createAttribute() , Document.createElement() ,
+            Document.createEvent() , Document.exitFullscreen() ,
+            Document.exitPictureInPicture() , Document.getElementById() ,
+            Document.getElementsByClassName() , Document.getElementsByTagName()
+            , Document.getElementsByTagNameNS() , Document.querySelector() ,
+            Document.querySelectorAll() , Document.getSelection() ,
+            Document.hasStorageAccess() , Document.hasFocus()
+          </td>
+          <td>
+            Window.reportError() , Window.addEventListener() ,
+            Window.removeEventListener() , Window.dispatchEvent() ,
+            Window.alert() , Window.confirm() , Window.prompt() , Window.print()
+            , Window.stop() , Window.blur() , Window.setImmediate() ,
+            Window.clearImmediate() , Window.setInterval() ,
+            Window.clearInterval() , Window.setTimeout() , Window.clearTimeout()
+            , Window.open() , Window.close() , Window.moveTo() ,
+            Window.resizeBy() , Window.scroll() , Window.scrollTo() ,
+            Window.getSelection()
+          </td>
+        </tr>
+        <tr>
+          <td>Interesting events</td>
+          <td>
+            scroll , wheel , visibilitychange , animationstart , animationend ,
+            copy , cut , paste , drag , drop , fullscreenchange , keydown ,
+            keyup , DOMContentLoaded , pointermove , selectionchange , touchmove
+            , transitionrun
+          </td>
+          <td>
+            error , languagechange , deviceorientation , resize , storage ,
+            animationstart , animationend , copy , cut , paste , offline ,
+            online , focus , blur , pagehide , load , appinstalled , message ,
+            beforeprint , afterprint , unhandledrejection , rejectionhandled ,
+            transitionrun
+          </td>
+        </tr>
+        <tr>
+          <td>Some common points apart from the events fired</td>
+          <td>
+            It is a Host object (not a native object)<sup class="footnote-ref"
+              ><a href="#fn-4" id="fnref-4" data-footnote-ref>4</a></sup
+            >
+          </td>
+          <td>same here</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Summarizing the above, from this stack overflow answer
+      <sup class="footnote-ref"
+        ><a href="#fn-5" id="fnref-5" data-footnote-ref>5</a></sup
+      >:
+    </p>
+    <p>
+      <em
+        >window is the main JavaScript object root, aka the global object in a
+        browser, and it can also be treated as the root of the document object
+        model. You can access it as window.</em
+      >
+    </p>
+    <p>
+      <em
+        >window.screen or just screen is a small information object about
+        physical screen dimensions.</em
+      >
+    </p>
+    <p>
+      <em
+        >window.document or just document is the main object of the potentially
+        visible (or better yet: rendered) document object model/DOM.</em
+      >
+    </p>
+    <p>
+      <em
+        >Since window is the global object, you can reference any properties of
+        it with just the property name - so you do not have to write down
+        window. - it will be figured out by the runtime.</em
+      >
+    </p>
+    <h4>References:</h4>
+    <ul>
+      <li>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document"
+          >https://developer.mozilla.org/en-US/docs/Web/API/Document</a
+        >
+      </li>
+      <li>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window"
+          >https://developer.mozilla.org/en-US/docs/Web/API/Window</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://stackoverflow.com/questions/2934787/view-list-of-all-javascript-variables-in-google-chrome-console/2934807#2934807"
+          >https://stackoverflow.com/questions/2934787/view-list-of-all-javascript-variables-in-google-chrome-console/2934807#2934807</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model"
+          >https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model"
+          >https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model</a
+        >
+      </li>
+    </ul>
+    <h5>Footnotes:</h5>
+    <section class="footnotes" data-footnotes>
+      <ol>
+        <li id="fn-1">
+          <p>
+            <a
+              href="https://www.geeksforgeeks.org/differences-between-document-and-window-objects/"
+              >https://www.geeksforgeeks.org/differences-between-document-and-window-objects/</a
+            >
+            ,
+            <a
+              href="https://stackoverflow.com/questions/9895202/what-is-the-difference-between-window-screen-and-document-in-javascript#9895261"
+              >https://stackoverflow.com/questions/9895202/what-is-the-difference-between-window-screen-and-document-in-javascript#9895261</a
+            >
+            <a
+              href="#fnref-1"
+              class="footnote-backref"
+              data-footnote-backref
+              aria-label="Back to content"
+              >?</a
+            >
+          </p>
+        </li>
+        <li id="fn-2">
+          <p>
+            <a
+              href="https://stackoverflow.com/questions/6349232/whats-the-difference-between-a-global-variable-and-a-window-variable-in-javas"
+              >https://stackoverflow.com/questions/6349232/whats-the-difference-between-a-global-variable-and-a-window-variable-in-javas</a
+            >
+            <a
+              href="#fnref-2"
+              class="footnote-backref"
+              data-footnote-backref
+              aria-label="Back to content"
+              >?</a
+            >
+          </p>
+        </li>
+        <li id="fn-3">
+          <p>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/Window/window"
+              >https://developer.mozilla.org/en-US/docs/Web/API/Window/window</a
+            >
+            <a
+              href="#fnref-3"
+              class="footnote-backref"
+              data-footnote-backref
+              aria-label="Back to content"
+              >?</a
+            >
+          </p>
+        </li>
+        <li id="fn-4">
+          <p>
+            <a
+              href="https://www.geeksforgeeks.org/what-is-the-difference-between-host-objects-and-native-objects/"
+              >https://www.geeksforgeeks.org/what-is-the-difference-between-host-objects-and-native-objects/</a
+            >?
+            <a
+              href="#fnref-4"
+              class="footnote-backref"
+              data-footnote-backref
+              aria-label="Back to content"
+              >?</a
+            >
+          </p>
+        </li>
+        <li id="fn-5">
+          <p>
+            <a
+              href="https://stackoverflow.com/questions/9895202/what-is-the-difference-between-window-screen-and-document-in-javascript#9895261"
+              >https://stackoverflow.com/questions/9895202/what-is-the-difference-between-window-screen-and-document-in-javascript#9895261</a
+            >
+            <a
+              href="#fnref-5"
+              class="footnote-backref"
+              data-footnote-backref
+              aria-label="Back to content"
+              >?</a
+            >
+          </p>
+        </li>
+      </ol>
+    </section>
+  </body>
+</html>

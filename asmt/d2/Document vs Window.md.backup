@@ -30,8 +30,7 @@ _Since window is the global object, you can reference any properties of it with 
 #### References:
 * https://developer.mozilla.org/en-US/docs/Web/API/Document
 * https://developer.mozilla.org/en-US/docs/Web/API/Window
-
-#### Misc:
+* https://stackoverflow.com/questions/2934787/view-list-of-all-javascript-variables-in-google-chrome-console/2934807#2934807
 * https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
 * https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model
 

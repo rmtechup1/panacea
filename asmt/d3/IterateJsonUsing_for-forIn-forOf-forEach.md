@@ -136,3 +136,4 @@ Output:
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
 * for, for..in, for..of: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements
 * https://stackoverflow.com/questions/29285897/difference-between-for-in-and-for-of-statements
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach

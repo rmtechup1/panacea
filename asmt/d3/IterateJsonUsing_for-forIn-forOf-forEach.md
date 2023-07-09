@@ -53,11 +53,18 @@ var jsonObj = JSON.parse(jsonInput);
 for(tmpKey in jsonObj){
   console.log(`${tmpKey}: ${jsonObj[tmpKey]}`);
 }
+```
 
+#### for..of
+```
 //Iteration over json using: 'for..of'
 // for..of iterates over values defined for itration in the 'iterable' object.
 // output if we use for..of on jsonObj:- TypeError: jsonObj is not iterable
 ```
+
+
+
+
 
 
 

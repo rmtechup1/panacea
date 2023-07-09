@@ -31,7 +31,7 @@ Index
 ### Iterating with various for loops:
 #### for:
 ```
-const jsonInputObj = '{"name":"John", "age":30, "car":null}';
+const jsonInput = '{"name":"John", "age":30, "car":null}';
 
 var jsonObj = JSON.parse(jsonInput);
 
@@ -44,7 +44,7 @@ for(let i=0; i < keysArr.length; i++){
 
 #### for..in:
 ```
-const jsonInputObj = '{"name":"John", "age":30, "car":null}';
+const jsonInput = '{"name":"John", "age":30, "car":null}';
 
 var jsonObj = JSON.parse(jsonInput);
 

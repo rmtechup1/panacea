@@ -42,6 +42,14 @@ for(let i=0; i < keysArr.length; i++){
 }
 ```
 
+Output:
+```
+    Key value pair #1:- name: John
+    Key value pair #2:- age: 30
+    Key value pair #3:- car: null
+```
+
+
 #### for..in:
 ```
 const jsonInput = '{"name":"John", "age":30, "car":null}';
@@ -54,16 +62,70 @@ for(tmpKey in jsonObj){
 }
 ```
 
+Output:
+```
+    name: John
+    age: 30
+    car: null
+```
+
+
 #### for..of
 ```
-// for..of iterates over values defined for itration in the 'iterable' object.
-// output if we use for..of on jsonObj:- TypeError: jsonObj is not iterable
+const jsonInput = '[{"name":"John", "age": 22}, {"name":"Cindy", "age": 42}, {"name":"Raj", "age": 35}]';
+
+var jsonObj = JSON.parse(jsonInput);
+
+// for..of iterates over values defined for iteration in the 'iterable' object. 
+// Hence ordinary JSON can't be iterated, only iterable objects such as arrays, an array of JSONS...etc can be used here
+for(tmp of jsonObj){
+  console.log('Start of details for "', tmp.name, '"');
+  for(key in tmp){
+    console.log(`${key}: ${tmp[key]}`)
+  }
+}
 ```
 
+Output:
+```
+    Start of details for " John "
+    name: John
+    age: 22
+    Start of details for " Cindy "
+    name: Cindy
+    age: 42
+    Start of details for " Raj "
+    name: Raj
+    age: 25
+```
 
+#### forEach
+```
+const jsonInput = '[{"name":"John", "age": 22}, {"name":"Cindy", "age": 42}, {"name":"Raj", "age": 35}]';
 
+var jsonObj = JSON.parse(jsonInput);
 
+//forEach() method executes a provided function once for each array element
+jsonObj.forEach(tmpJson => {
+  console.log('Start of details for "', tmpJson.name, '"');
+  for(key in tmpJson){
+    console.log(`${key}: ${tmpJson[key]}`)
+  }
+})
+```
 
+Output:
+```
+    Start of details for " John "
+    name: John
+    age: 22
+    Start of details for " Cindy "
+    name: Cindy
+    age: 42
+    Start of details for " Raj "
+    name: Raj
+    age: 35
+```
 
 
 ### References:
@@ -73,3 +135,4 @@ for(tmpKey in jsonObj){
 * https://datatracker.ietf.org/doc/html/rfc8259
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
 * for, for..in, for..of: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements
+* https://stackoverflow.com/questions/29285897/difference-between-for-in-and-for-of-statements

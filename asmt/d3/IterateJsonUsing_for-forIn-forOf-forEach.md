@@ -35,8 +35,8 @@ const jsonInput = '{"name":"John", "age":30, "car":null}';
 
 var jsonObj = JSON.parse(jsonInput);
 
-//Iteration over json using: 'for'
 const keysArr = Object.keys(jsonObj);
+
 for(let i=0; i < keysArr.length; i++){
   console.log(`Key value pair #${i+1}:- ${keysArr[i]}: ${jsonObj[keysArr[i]]}`);
 }
@@ -48,7 +48,6 @@ const jsonInput = '{"name":"John", "age":30, "car":null}';
 
 var jsonObj = JSON.parse(jsonInput);
 
-//Iteration over json using: 'for..in'
 // for..in iterates over all enumerable string properties of an object
 for(tmpKey in jsonObj){
   console.log(`${tmpKey}: ${jsonObj[tmpKey]}`);
@@ -57,7 +56,6 @@ for(tmpKey in jsonObj){
 
 #### for..of
 ```
-//Iteration over json using: 'for..of'
 // for..of iterates over values defined for itration in the 'iterable' object.
 // output if we use for..of on jsonObj:- TypeError: jsonObj is not iterable
 ```
